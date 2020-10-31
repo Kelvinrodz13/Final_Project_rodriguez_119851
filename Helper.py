@@ -70,7 +70,7 @@ def PlayerTurnEvent(player = User(), game = Board()):
                         
                         for i in range(len(game.getPlayerList())):
                             temp = game.getPlayer(i)
-                            player.Devour(temp) # verify if the pawn landed in another players spot, to be devoured and sent to the nest
+                            #player.Devour(temp) # verify if the pawn landed in another players spot, to be devoured and sent to the nest
 
                         player.Pawn_Reach_End() #validate if the user reached the end of color path
                         Dice1_been_used = True
@@ -78,7 +78,7 @@ def PlayerTurnEvent(player = User(), game = Board()):
                     else:
                         if chosenValue  == 2 and Dice2_been_used != True: #Check if the Dice2 Value has been used already 
                             player.getPawn(int(chosenPawn)-1).Advance(Dice2)
-                            player.Devour()
+                            #player.Devour()
                             player.Pawn_Reach_End() #validate if the user reached the end of color path
                             Dice2_been_used = True
                             print("Pawn has moved {} steps".format(Dice2))
