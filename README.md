@@ -12,4 +12,5 @@ Description:
 This repository contains two version of the code. The main branch is a version of Parcheesi text based, while the other branches
 are the graphical version of the Parcheesi.
 
+The Functioning BRANCH of the graphical version of the code is : PARCHEESI DEVELOPMENT
 
