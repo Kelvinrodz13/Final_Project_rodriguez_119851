@@ -33,12 +33,12 @@ def GraphicInterface(win):
 
     #Creating rectangle inside Circles
     green_rect14 = Rectangle(Point(50,520),Point(165,390))
-    green_rect14.setFill('green')
+    green_rect14.setFill(color_rgb(80,220,100))
     green_rect14.setWidth(1)
     green_rect14.draw(win)
 
     red_rect14 = Rectangle(Point(50,175),Point(165,40))
-    red_rect14.setFill('red')
+    red_rect14.setFill(color_rgb(255,204,203))
     red_rect14.setWidth(1)
     red_rect14.draw(win)
 
@@ -302,5 +302,5 @@ def GraphicInterface(win):
     x2 = Line(Point(340,230), Point(230,330))
     x2.setFill('black')
     x2.draw(win)
-
- 
+    
+   
