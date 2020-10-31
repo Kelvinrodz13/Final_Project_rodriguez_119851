@@ -4,8 +4,14 @@ class Board():
     def __init__(self):
         self.players = [User('Red'),User('Blue'),User('Yellow'),User('Green')]
     
+    def __getitem__(self,index = 0):
+        return self.players[index] 
+    
     def getPlayer(self, index=int):
-        return self.players.__getitem__(index)
+        return self.__getitem__(index)
+
+    def getPlayerList(self):
+        return self.players
     
     def WhoWon(self):
         for person in self.players:

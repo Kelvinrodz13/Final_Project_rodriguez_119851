@@ -29,6 +29,8 @@ class User():
         """
         return self.PawnList[index]
     
+    
+    
     def PawnsInField(self):
         """
         boolean function that validate if the player has any pawn in board
@@ -48,16 +50,23 @@ class User():
         for i in range(len(self.PawnList)):
             if self.PawnList[i].getPos() == 0:
                 if self.getColor() == 'Red':
-                    self.PawnList[i].setPos(5)
+                    self.PawnList[i].setPos(39)
                 elif self.getColor() == 'Blue':
-                    self.PawnList[i].setPos(21)
+                    self.PawnList[i].setPos(22)
                 elif self.getColor() == 'Yellow':
-                    self.PawnList[i].setPos(37)
+                    self.PawnList[i].setPos(5)
                 else:
                     self.PawnList[i].setPos(53)
 
                 break
     
+    def Pawn_Reach_End(self):
+        for i in range(len(self.PawnList)):
+            if self.getColor() == 'Yellow':
+                if PawnList[i].getPos() == 68 and PawnList[i].getStepsTaken() == 63:
+                    self.PiecesAtEnd += 1
+                    self.PawnList.pop(i)
+
 
     def RollDice(self):
         """
@@ -65,17 +74,40 @@ class User():
         """
         return random.randint(1,6) , random.randint(1,6)
     
-    def Devour(self, adversary = User(), pos=int):
+    def Devour(self, adversary = User()):
         """
         if a player lands in the same spot as another user, an event will occur where the player will capture the spot and losing side's pawn
         will be captured and sent to nest.
         """
         for pawns in self.PawnList:
+            
             for adv_pawns in adversary.PawnList:
-                if pawns.getPos() == adv_pawns.getPos():
+                if (pawns.getPos() == adv_pawns.getPos() and self.getColor() != adversary.getColor()) and (pawns.isSafe() != True and adv_pawns.isSafe() != True):
                     adv_pawns.amount_steps_taken = 0
                     adv_pawns.setPos(0)
                     adv_pawns.setStatus(True)
                 else:
                     continue
+    
+    def isBlocked(self,adversary = User,pawnIndex = int):
+        """ Check if the pawn is blocked from spawning"""
+        for adv_pawns in adversary.PawnList:
+            if(self.getColor() != adversary.getColor()) and (self.PawnList[pawnIndex].getPos() == adv_pawns.getPos()):
+                return True
+            
+            return False
+    
+    def isBlocked(self,adversary = User):
+        """ Overloaded function that check for blocked movement between all of adversarys pawn"""
+        for pawns in self.PawnList:
+            for adv_pawns in adversary.PawnList:
+               if(self.getColor() != adversary.getColor()) and (pawns.getPos() == adv_pawns.getPos()):
+                   return True
+            
+            return False
+
+        
+
+
+
     
