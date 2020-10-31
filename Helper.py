@@ -62,29 +62,43 @@ def PlayerTurnEvent(player = User(), game = Board()):
                             print("{}st Pawn located in {}".format(i+1,player.getPawn(i).getPos()))
                     
                     chosenPawn = int(input("Choose pawn you wish to move by location: ")) # chosen pawn to be moved
-                    chosenValue = int(input("Pick which value to the pawn? Value1: {} or Value2{} or Value3: {}: ".format(Dice1, Dice2, Dice1+Dice2))) # chosen value to be used to move the pawn
+                    chosenValue = int(input("Pick which value to the pawn(choose between 1, 2 or 3)? Value1: {} or Value2{} or Value3: {}: ".format(Dice1, Dice2, Dice1+Dice2))) # chosen value to be used to move the pawn
 
 
                     if chosenValue  == 1 and Dice1_been_used != True: #Check if the Dice1 Value has been used already 
-                        player.getPawn(int(chosenPawn)-1).Advance(Dice1)
+                        result = player.getPawn(int(chosenPawn)-1).Advance(Dice1)
                         
                         for i in range(len(game.getPlayerList())):
-                            temp = game.getPlayer(i)
-                            #player.Devour(temp) # verify if the pawn landed in another players spot, to be devoured and sent to the nest
+                            if( game.getPlayer(i).getPawn(i).getPos() == player.getPawn(int(chosenPawn)-1) and game.getPlayer(i).getColor != player.getColor()):
+                                temp = game.getPlayer(i).getPawn(i)
+                                isDevored = player.Devour(temp,game.getPlayer(i).getColor(),i) # verify if the pawn landed in another players spot, to be devoured and sent to the nest
 
                         player.Pawn_Reach_End() #validate if the user reached the end of color path
                         Dice1_been_used = True
                         print("Pawn has moved {} steps".format(Dice1))
                     else:
                         if chosenValue  == 2 and Dice2_been_used != True: #Check if the Dice2 Value has been used already 
-                            player.getPawn(int(chosenPawn)-1).Advance(Dice2)
-                            #player.Devour()
+                            result = player.getPawn(int(chosenPawn)-1).Advance(Dice2)
+                        
+                            for i in range(len(game.getPlayerList())):
+                                if( game.getPlayer(i).getPawn(i).getPos() == player.getPawn(int(chosenPawn)-1) and game.getPlayer(i).getColor != player.getColor()):
+                                    temp = game.getPlayer(i).getPawn(i)
+                                    isDevored = player.Devour(temp,game.getPlayer(i).getColor(),i) # verify if the pawn landed in another players spot, to be devoured and sent to the nest
+
+                                
                             player.Pawn_Reach_End() #validate if the user reached the end of color path
                             Dice2_been_used = True
                             print("Pawn has moved {} steps".format(Dice2))
+
                         else:
-                            if chosenValue  == 3 and (Dice1_been_used != True and Dice2_been_used != True): #Check if the Dice1 adn Dice2 Value has been used already 
-                                player.getPawn(int(chosenPawn)-1).Advance(Dice2 + Dice2)
+                            if chosenValue  == 3 and (Dice1_been_used != True and Dice2_been_used != True): #Check if the Dice1 adn Dice2 Value has been used already
+                                result = player.getPawn(int(chosenPawn)-1).Advance(Dice2)
+
+                                for i in range(len(game.getPlayerList())):
+                                    if( game.getPlayer(i).getPawn(i).getPos() == player.getPawn(int(chosenPawn)-1) and game.getPlayer(i).getColor != player.getColor()):
+                                        temp = game.getPlayer(i).getPawn(i)
+                                        isDevored = player.Devour(temp,game.getPlayer(i).getColor(),i) # verify if the pawn landed in another players spot, to be devoured and sent to the nest
+                                
                                 player.Pawn_Reach_End()#validate if the user reached the end of color path
                                 Dice2_been_used = True
                                 print("Pawn has moved {} steps".format(Dice2+Dice1))
