@@ -11,6 +11,9 @@ class User():
         self.PawnList = [Pawn(),Pawn(),Pawn(),Pawn()]
         self.PiecesAtEnd = 0
     
+    def getPiecesAtEnd(self):
+        return self.PiecesAtEnd
+    
     def setColor(self, newColor=str):
         """
         set the color name of the player
@@ -63,7 +66,7 @@ class User():
     def Pawn_Reach_End(self):
         for i in range(len(self.PawnList)):
             if self.getColor() == 'Yellow':
-                if PawnList[i].getPos() == 68 and PawnList[i].getStepsTaken() == 63:
+                if self.PawnList[i].getPos() == 68 and self.PawnList[i].getStepsTaken() == 63:
                     self.PiecesAtEnd += 1
                     self.PawnList.pop(i)
 
@@ -74,7 +77,7 @@ class User():
         """
         return random.randint(1,6) , random.randint(1,6)
     
-    def Devour(self, adversary = User()):
+    def Devour(self, adversary):
         """
         if a player lands in the same spot as another user, an event will occur where the player will capture the spot and losing side's pawn
         will be captured and sent to nest.
@@ -89,7 +92,7 @@ class User():
                 else:
                     continue
     
-    def isBlocked(self,adversary = User,pawnIndex = int):
+    def isBlocked(self,adversary,pawnIndex = int):
         """ Check if the pawn is blocked from spawning"""
         for adv_pawns in adversary.PawnList:
             if(self.getColor() != adversary.getColor()) and (self.PawnList[pawnIndex].getPos() == adv_pawns.getPos()):
@@ -97,7 +100,7 @@ class User():
             
             return False
     
-    def isBlocked(self,adversary = User):
+    def isBlocked(self,adversary):
         """ Overloaded function that check for blocked movement between all of adversarys pawn"""
         for pawns in self.PawnList:
             for adv_pawns in adversary.PawnList:
