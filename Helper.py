@@ -24,7 +24,7 @@ def PlayerTurnEvent(player = User(), game = Board()):
 
         if Main_Choice == 'a' and ((Dice1 == 5 or Dice2 == 5) or (Dice1+Dice2 == 5)):
             if Dice1 == 5 or Dice2 ==5: #Chech which of the dice contain a 5
-                if Dice1 == 5:
+                if Dice1 == 5 and (Dice1_been_used != True):
                     for i in range(len(game.getPlayerList())):
                             temp = game.getPlayer(i)
                             if player.isBlocked(temp,i) == False:
@@ -33,15 +33,16 @@ def PlayerTurnEvent(player = User(), game = Board()):
                             else:
                                 print("Pawn cannot leave nest. Opposing player is blocking spawn point.",'\n')
                 else:
-                    for i in range(len(game.getPlayerList())):
-                            temp = game.getPlayer(i)
-                            if player.isBlocked(temp,i) == False:
-                                player.leaveNest(player.getColor()) # spawn a new pawn of the player
-                                Dice2_been_used = True
-                            else:
-                                print("Pawn cannot leave nest. Opposing player is blocking spawn point.",'\n')
+                    if Dice2 == 5 and (Dice2_been_used != True):
+                        for i in range(len(game.getPlayerList())):
+                                temp = game.getPlayer(i)
+                                if player.isBlocked(temp,i) == False:
+                                    player.leaveNest(player.getColor()) # spawn a new pawn of the player
+                                    Dice2_been_used = True
+                                else:
+                                    print("Pawn cannot leave nest. Opposing player is blocking spawn point.",'\n')
             else:
-                if (Dice1+Dice2) == 5: #Check if the sum of both dices actually equals 5
+                if (Dice1+Dice2) == 5 and (Dice1_been_used != True and Dice2_been_used != True ): #Check if the sum of both dices actually equals 5
                     for i in range(len(game.getPlayerList())):
                             temp = game.getPlayer(i)
                             if player.isBlocked(temp,i) == False:
@@ -65,7 +66,7 @@ def PlayerTurnEvent(player = User(), game = Board()):
 
 
                     if chosenValue  == 1 and Dice1_been_used != True: #Check if the Dice1 Value has been used already 
-                        player.getPawn(chosenPawn-1).Advance(Dice1)
+                        player.getPawn(int(chosenPawn)-1).Advance(Dice1)
                         
                         for i in range(len(game.getPlayerList())):
                             temp = game.getPlayer(i)
@@ -76,14 +77,14 @@ def PlayerTurnEvent(player = User(), game = Board()):
                         print("Pawn has moved {} steps".format(Dice1))
                     else:
                         if chosenValue  == 2 and Dice2_been_used != True: #Check if the Dice2 Value has been used already 
-                            player.getPawn(chosenPawn-1).Advance(Dice2)
+                            player.getPawn(int(chosenPawn)-1).Advance(Dice2)
                             player.Devour()
                             player.Pawn_Reach_End() #validate if the user reached the end of color path
                             Dice2_been_used = True
                             print("Pawn has moved {} steps".format(Dice2))
                         else:
                             if chosenValue  == 3 and (Dice1_been_used != True and Dice2_been_used != True): #Check if the Dice1 adn Dice2 Value has been used already 
-                                player.getPawn(chosenPawn-1).Advance(Dice2 + Dice2)
+                                player.getPawn(int(chosenPawn)-1).Advance(Dice2 + Dice2)
                                 player.Pawn_Reach_End()#validate if the user reached the end of color path
                                 Dice2_been_used = True
                                 print("Pawn has moved {} steps".format(Dice2+Dice1))
