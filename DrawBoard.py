@@ -2,33 +2,58 @@ from graphics import *
 import random 
 
 def GraphicInterface(win):  
+
+    #Main Board
     big_rect1 = Rectangle(Point(15,10),Point(560,550))
     big_rect1.setFill(color_rgb(255,253,208))
     big_rect1.setWidth(3)
     big_rect1.draw(win)
 
 
+
+    #Starting Positions for the respective Players
     green_circ = Circle(Point(108,455),89)
     green_circ.setFill('green')
     green_circ.setWidth(1)
     green_circ.draw(win)
 
-
     red_circ = Circle(Point(108,107),89)
     red_circ.setFill('red')
     red_circ.draw(win)
 
-
     blue_circ = Circle(Point(465,107),89)
     blue_circ.setFill('cyan')
     blue_circ.draw(win)
-
 
     yellow_circ = Circle(Point(465,455),89)
     yellow_circ.setFill('yellow')
     yellow_circ.draw(win)
 
 
+
+    #Creating rectangle inside Circles
+    green_rect14 = Rectangle(Point(50,520),Point(165,390))
+    green_rect14.setFill('green')
+    green_rect14.setWidth(1)
+    green_rect14.draw(win)
+
+    red_rect14 = Rectangle(Point(50,175),Point(165,40))
+    red_rect14.setFill('red')
+    red_rect14.setWidth(1)
+    red_rect14.draw(win)
+
+    blue_rect14 = Rectangle(Point(400,170),Point(527,45))
+    blue_rect14.setFill(color_rgb(115,125,255))
+    blue_rect14.setWidth(1)
+    blue_rect14.draw(win)
+
+    yellow_rect14 = Rectangle(Point(400,520),Point(527,390))
+    yellow_rect14.setFill(color_rgb(255,255,120))
+    yellow_rect14.setWidth(1)
+    yellow_rect14.draw(win)
+
+
+    #Creating Main Rows For Each side
     yellow_rect2 = Rectangle(Point(230,200),Point(340,540))
     yellow_rect2.setWidth(1)
     yellow_rect2.draw(win)
@@ -42,15 +67,17 @@ def GraphicInterface(win):
     blue_rect2 = Rectangle(Point(230,230),Point(550,330))
     blue_rect2.draw(win)
 
-    red_rect3 = Rectangle(Point(230,200),Point(260,540))
-    red_rect3.setWidth(1)
-    red_rect3.draw(win)
+
+
+    #Creating Columns and rows for bottom hand side
+    yellow_rect3 = Rectangle(Point(230,200),Point(260,540))
+    yellow_rect3.setWidth(1)
+    yellow_rect3.draw(win)
 
     yellow_rect4 = Rectangle(Point(260,300),Point(305,540))
     yellow_rect4.setFill('yellow')
     yellow_rect4.setWidth(1)
     yellow_rect4.draw(win)
-
 
     yellow_rect5 = Rectangle(Point(230,446),Point(340,475))
     yellow_rect5.setWidth(1)
@@ -81,7 +108,7 @@ def GraphicInterface(win):
     yellow_rect11.draw(win)
 
 
-
+    #Safe Space Color Fill
     yellow_rect20 = Rectangle(Point(305,388),Point(340,417))
     yellow_rect20.setFill('yellow')
     yellow_rect20.setWidth(1)
@@ -94,12 +121,14 @@ def GraphicInterface(win):
 
    
 
-
+    #Color of Middle Rectangle
     rectmain = Rectangle(Point(260,255),Point(308,300))
     rectmain.setFill('red')
     rectmain.draw(win)
 
-   
+
+
+    #Color of middle Polygons
     poly_r3 = Polygon(Point(260,255),Point(260,300),Point(284,277.5))
     poly_r3.setWidth(1)
     poly_r3.setFill('green')
@@ -114,17 +143,7 @@ def GraphicInterface(win):
     poly_r5.setWidth(1)
     poly_r5.setFill('yellow')
     poly_r5.draw(win)
-
-    """x = Line(Point(230,230), Point(340,330))
-    x.setFill('black')
-    x.draw(win)"""
-
-
-
-
-
-
-
+    
     green_rect3 = Rectangle(Point(15,230),Point(230,255))
     green_rect3.setWidth(1)
     green_rect3.draw(win)
@@ -134,12 +153,15 @@ def GraphicInterface(win):
     green_rect4.setWidth(1)
     green_rect4.draw(win)
 
+
+
     #Redid the lower rectangle so the green space would not overlap it in space 60/8
     yellow_rect25 = Rectangle(Point(230,200),Point(340,540))
     yellow_rect25.setWidth(1)
     yellow_rect25.draw(win)
 
-
+    
+    #Continuation of Column and rows
     green_rect5 = Rectangle(Point(15,230),Point(45,330))
     green_rect5.setWidth(1)
     green_rect5.draw(win)
@@ -164,6 +186,9 @@ def GraphicInterface(win):
     green_rect10.setWidth(1)
     green_rect10.draw(win)
 
+
+
+    #Safe spaces for left hand side
     green_rect11 = Rectangle(Point(141,230),Point(170,255))
     green_rect11.setFill('red')
     green_rect11.draw(win)
@@ -175,7 +200,7 @@ def GraphicInterface(win):
 
 
 
-
+    #Creating columns and rows for top side
     red_rect3 = Rectangle(Point(230,15),Point(260,200))
     red_rect3.setWidth(1)
     red_rect3.draw(win)
@@ -208,6 +233,8 @@ def GraphicInterface(win):
     red_rect9.draw(win)
 
 
+
+    #Safe spaces filled for top side
     red_rect11 = Rectangle(Point(305,142),Point(340,171))
     red_rect11.setFill('blue')
     red_rect11.draw(win)
@@ -226,7 +253,10 @@ def GraphicInterface(win):
     red_rect4.setFill('blue')
     red_rect4.draw(win)
 
-#Redid the rectangle due to overlap in space  42/26 
+
+
+    #Redid the rectangle due to overlap in space  42/26 
+    #Creating Cloumns and rows for right hand side
     blue_rect20 = Rectangle(Point(230,230),Point(550,330))
     blue_rect20.draw(win)
 
@@ -263,31 +293,8 @@ def GraphicInterface(win):
     blue_rect12.draw(win)
 
 
-    #Creating rectangle inside Circles
 
-    green_rect14 = Rectangle(Point(50,520),Point(165,390))
-    green_rect14.setFill('green')
-    green_rect14.setWidth(1)
-    green_rect14.draw(win)
-
-    red_rect14 = Rectangle(Point(50,175),Point(165,40))
-    red_rect14.setFill('red')
-    red_rect14.setWidth(1)
-    red_rect14.draw(win)
-
-    blue_rect14 = Rectangle(Point(400,170),Point(527,45))
-    blue_rect14.setFill(color_rgb(115,125,255))
-    blue_rect14.setWidth(1)
-    blue_rect14.draw(win)
-
-    yellow_rect14 = Rectangle(Point(400,520),Point(527,390))
-    yellow_rect14.setFill(color_rgb(255,255,120))
-    yellow_rect14.setWidth(1)
-    yellow_rect14.draw(win)
-
-
-
-
+    #Lines for Polygons
     x = Line(Point(230,230), Point(340,330))
     x.setFill('black')
     x.draw(win)
@@ -296,13 +303,7 @@ def GraphicInterface(win):
     x2.setFill('black')
     x2.draw(win)
 
-    
+ 
 
 
-    dice = [1,2,3,4,5,6]
-    Dice = random.choice(dice)
-
-    #win.getMouse()
-   # win.close()
-   
 
