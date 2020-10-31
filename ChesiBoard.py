@@ -15,7 +15,7 @@ class Board():
     
     def WhoWon(self):
         for person in self.players:
-            if person.PiecesAtEnd() == 4:
+            if person.getPiecesAtEnd() == 4:
                 return True
         
         return False
