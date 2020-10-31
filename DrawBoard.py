@@ -304,6 +304,3 @@ def GraphicInterface(win):
     x2.draw(win)
 
  
-
-
-

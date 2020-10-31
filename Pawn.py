@@ -41,10 +41,18 @@ class Pawn():
         """
         function that advances the pawn throught the board
         """
-        if new_pos <= 12:
+
+        if (self.pos + new_pos) > 68:
+            self.pos = 68 - (68 - new_pos) # cycle again from 68 to range of (1,68)
+            self.isSafe()
+
+            return self.pos
+        else:
             self.pos += new_pos
             self.amount_steps_taken += new_pos
             self.isSafe()
+
+            return self.pos
 
     
     def isSafe(self):

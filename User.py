@@ -1,5 +1,9 @@
 from Pawn import *
+from graphics import *
+from coordinates import *
 import random
+
+circleSize = 8
 class User():
     def __init__(self,new_name=str):
         """
@@ -10,9 +14,50 @@ class User():
         self.color = new_name
         self.PawnList = [Pawn(),Pawn(),Pawn(),Pawn()]
         self.PiecesAtEnd = 0
+
+        if self.color == 'Red':
+            self.graphPawns = [
+            Circle(Point(100,100), circleSize),
+            Circle(Point(118,100), circleSize),
+            Circle(Point(128,100),circleSize),
+            Circle(Point(138,100), circleSize)]
+
+        elif self.color == 'Blue':
+            self.graphPawns = [
+            Circle(Point(440,107), circleSize),
+            Circle(Point(450,107), circleSize),
+            Circle(Point(460,107), circleSize),
+            Circle(Point(470,107), circleSize)]
+        elif self.color == 'Yellow':
+            self.graphPawns = [
+            Circle(Point(440,455), circleSize),
+            Circle(Point(450,455), circleSize),
+            Circle(Point(460,455), circleSize),
+            Circle(Point(470,455), circleSize)]
+        else:
+            self.graphPawns = [
+            Circle(Point(100,455), circleSize),
+            Circle(Point(118,455), circleSize),
+            Circle(Point(128,455), circleSize),
+            Circle(Point(138,455), circleSize)]
+
+
     
     def getPiecesAtEnd(self):
         return self.PiecesAtEnd
+
+    def moveGraph_Pawn(self, new_pos, index,win = GraphWin):
+        temp = boardCoords[new_pos]
+        self.graphPawns[index].undraw()
+        self.graphPawns.insert(index,Circle(Point(temp.x,temp.y), circleSize))
+        self.graphPawns[index].setFill(self.getColor())
+        self.graphPawns[index].draw(win)
+
+    
+    def drawPawns(self,win = GraphWin):
+        for i in range(len(self.graphPawns)):
+            self.graphPawns[i].setFill(self.getColor())
+            self.graphPawns[i].draw(win)
     
     def setColor(self, newColor=str):
         """
@@ -45,7 +90,7 @@ class User():
 
         return amount
     
-    def leaveNest(self,color = str):
+    def leaveNest(self,color = str,win = GraphWin):
         """
         function that spawns the players spawn in their initial starting points.
         Each player have a different starting point depending on the color.
@@ -53,15 +98,173 @@ class User():
         for i in range(len(self.PawnList)):
             if self.PawnList[i].getPos() == 0:
                 if self.getColor() == 'Red':
-                    self.PawnList[i].setPos(39)
-                elif self.getColor() == 'Blue':
-                    self.PawnList[i].setPos(22)
-                elif self.getColor() == 'Yellow':
-                    self.PawnList[i].setPos(5)
-                else:
-                    self.PawnList[i].setPos(53)
 
+                    self.PawnList[i].setPos(39)
+                    temp = boardCoords[39]
+
+                    self.graphPawns[i].undraw()
+                    self.graphPawns.insert(i,Circle(Point(temp.x,temp.y), circleSize))
+                    self.graphPawns[i].setFill(self.getColor())
+                    self.graphPawns[i].undraw()
+                    self.graphPawns[i].draw(win)
+
+                    
+
+                elif self.getColor() == 'Blue':
+
+                    self.PawnList[i].setPos(22)
+                    temp = boardCoords[22]
+
+                    self.graphPawns[i].undraw()
+                    self.graphPawns.insert(i,Circle(Point(temp.x,temp.y), circleSize))
+                    self.graphPawns[i].setFill(self.getColor())
+
+                    self.graphPawns[i].undraw()
+                    self.graphPawns[i].draw(win)
+                    
+
+                elif self.getColor() == 'Yellow':
+
+                    self.PawnList[i].setPos(5)
+                    temp = boardCoords[5]
+
+                    self.graphPawns[i].undraw()
+                    self.graphPawns.insert(i,Circle(Point(temp.x,temp.y), circleSize))
+                    self.graphPawns[i].setFill(self.getColor())
+
+                    self.graphPawns[i].undraw()
+                    self.graphPawns[i].draw(win)
+                    
+
+                else:
+
+                    self.PawnList[i].setPos(56)
+                    temp = boardCoords[56]
+
+                    self.graphPawns[i].undraw()
+                    self.graphPawns.insert(i,Circle(Point(temp.x,temp.y), circleSize))
+                    self.graphPawns[i].setFill(self.getColor())
+
+                    self.graphPawns[i].undraw()
+                    self.graphPawns[i].draw(win)
+                
+                return i
                 break
+    
+    def returnGraph_Pawn_Start(self,i = int,win = GraphWin):
+
+        if self.getColor() == 'Red':
+            if i == 1:
+                self.graphPawns[i].undraw()
+                self.graphPawns.index(i,Circle(Point(100,100),circleSize))
+                self.graphPawns[i].setFill(self.getColor())
+                self.graphPawns[i].draw(win)
+                
+            elif i == 2:
+                
+
+                self.graphPawns[i].undraw()
+                self.graphPawns.index(i,Circle(Point(118,100),circleSize))
+                self.graphPawns[i].setFill(self.getColor())
+                self.graphPawns[i].draw(win)
+
+            elif i == 3:
+                
+
+                self.graphPawns[i].undraw()
+                self.graphPawns.index(i,Circle(Point(128,100),circleSize))
+                self.graphPawns[i].setFill(self.getColor())
+                self.graphPawns[i].draw(win)
+            else:
+               
+                self.graphPawns[i].undraw()
+                self.graphPawns.index(i,Circle(Point(138,100),circleSize))
+                self.graphPawns[i].setFill(self.getColor())
+                self.graphPawns[i].draw(win)
+                
+        elif self.getColor() == 'Blue':
+
+            if i == 1:
+                
+
+                self.graphPawns[i].undraw()
+                self.graphPawns.index(i,Circle(Point(440,107),circleSize))
+                self.graphPawns[i].setFill(self.getColor())
+                self.graphPawns[i].draw(win)
+                
+            elif i == 2:
+                
+
+                self.graphPawns[i].undraw()
+                self.graphPawns.index(i,Circle(Point(450,107),circleSize))
+                self.graphPawns[i].setFill(self.getColor())
+                self.graphPawns[i].draw(win)
+            elif i == 3:
+
+                self.graphPawns[i].undraw()
+                self.graphPawns.index(i,Circle(Point(460,1079),circleSize))
+                self.graphPawns[i].setFill(self.getColor())
+                self.graphPawns[i].draw(win)
+            else:
+
+                self.graphPawns[i].undraw()
+                self.graphPawns.index(i,Circle(Point(470,107),circleSize))
+                self.graphPawns[i].setFill(self.getColor())
+                self.graphPawns[i].draw(win)
+            
+        elif self.getColor() == 'Yellow':
+            if i == 1:
+                
+                self.graphPawns[i].undraw()
+                self.graphPawns.index(i,Circle(Point(440,455),circleSize))
+                self.graphPawns[i].setFill(self.getColor())
+                self.graphPawns[i].draw(win)
+
+            elif i == 2:
+
+                self.graphPawns[i].undraw()
+                self.graphPawns.index(i,Circle(Point(450,455),circleSize))
+                self.graphPawns[i].setFill(self.getColor())
+                self.graphPawns[i].draw(win)
+            elif i == 3:
+
+                self.graphPawns[i].undraw()
+                self.graphPawns.index(i,Circle(Point(460,455),circleSize))
+                self.graphPawns[i].setFill(self.getColor())
+                self.graphPawns[i].draw(win)
+            else:
+
+                self.graphPawns[i].undraw()
+                self.graphPawns.index(i,Circle(Point(470,455),circleSize))
+                self.graphPawns[i].setFill(self.getColor())
+                self.graphPawns[i].draw(win)
+            
+        else:
+            if i == 1:
+                self.graphPawns[i].undraw()
+                self.graphPawns.index(i,Circle(Point(100,455),circleSize))
+                self.graphPawns[i].setFill(self.getColor())
+                self.graphPawns[i].draw(win)
+            elif i == 2:
+
+                self.graphPawns[i].undraw()
+                self.graphPawns.index(i,Circle(Point(118,455),circleSize))
+                self.graphPawns[i].setFill(self.getColor())
+                self.graphPawns[i].draw(win)
+            elif i == 3:
+
+                self.graphPawns[i].undraw()
+                self.graphPawns.index(i,Circle(Point(128,455),circleSize))
+                self.graphPawns[i].setFill(self.getColor())
+                self.graphPawns[i].draw(win)
+            else:
+
+                self.graphPawns[i].undraw()
+                self.graphPawns.index(i,Circle(Point(138,455),circleSize))
+                self.graphPawns[i].setFill(self.getColor())
+                self.graphPawns[i].draw(win)
+            
+        
     
     def Pawn_Reach_End(self):
         for i in range(len(self.PawnList)):
@@ -69,6 +272,9 @@ class User():
                 if self.PawnList[i].getPos() == 68 and self.PawnList[i].getStepsTaken() == 63:
                     self.PiecesAtEnd += 1
                     self.PawnList.pop(i)
+
+                    self.graphPawns[i].undraw()
+                    self.graphPawns.pop(i)
 
 
     def RollDice(self):
@@ -82,15 +288,19 @@ class User():
         if a player lands in the same spot as another user, an event will occur where the player will capture the spot and losing side's pawn
         will be captured and sent to nest.
         """
+        
         for pawns in self.PawnList:
-            
-            for adv_pawns in adversary.PawnList:
-                if (pawns.getPos() == adv_pawns.getPos() and self.getColor() != adversary.getColor()) and (pawns.isSafe() != True and adv_pawns.isSafe() != True):
-                    adv_pawns.amount_steps_taken = 0
-                    adv_pawns.setPos(0)
-                    adv_pawns.setStatus(True)
-                else:
-                    continue
+            for i in range(len(adversary.PawnList)):
+                if (pawns.getPos() == adversary.PawnList[i].getPos() and self.getColor() != adversary.PawnList[i].getColor()) and (pawns.isSafe() != True and adversary.PawnList[i].isSafe() != True):
+                    adversary.PawnList[i].amount_steps_taken = 0
+                    adversary.PawnList[i].setPos(0)
+                    adversary.PawnList[i].setStatus(True)
+
+                    adversary.returnGraph_Pawn_Start(i)
+
+                    
+        
+
     
     def isBlocked(self,adversary,pawnIndex = int):
         """ Check if the pawn is blocked from spawning"""

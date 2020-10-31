@@ -1,6 +1,7 @@
 from graphics import *
 
 boardCoords = [
+Point(0,0),
 Point(322.0, 525.0),
 Point(323.0, 490.0),
 Point(321.0, 460.0),
