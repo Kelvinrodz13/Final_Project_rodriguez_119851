@@ -7,7 +7,7 @@ class Pawn():
         """
         self.pos = 0
         self.status = False
-        self.safe_places = [5,11,16,21,27,32,37,43,48,53,59,64]
+        self.safe_places = [5,12,17,22,29,34,39,46,56,63,68]
         self.amount_steps_taken = 0
     
     def setPos(self, new_pos):
@@ -17,6 +17,9 @@ class Pawn():
         if new_pos <= 68:
             self.pos = new_pos
             self.isSafe()
+    
+    def getStepsTaken(self):
+        return self.amount_steps_taken
     
     def getPos(self):
         """
