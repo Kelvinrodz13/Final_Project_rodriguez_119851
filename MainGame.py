@@ -51,8 +51,9 @@ while(Game.WhoWon() != True):
     showPlayerTurn.undraw()
     
 
-
-print('Player {} won the game!!!'.format(Game.getWhoWon()))
+showPlayerTurn.undraw()
+showPlayerTurn.setText('Player {} won the game!!!'.format(Game.getWhoWon()))
+showPlayerTurn.draw(win)
 
 
 win.getMouse()

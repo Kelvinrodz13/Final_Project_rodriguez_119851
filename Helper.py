@@ -20,14 +20,6 @@ def PlayerTurnEvent(player = User(), game = Board(), win = GraphWin):
     title.setSize(30)
     title.draw(win)
 
-    #__________________________________________Drawing Pawns
-
-    """for player in game.getPlayerList():
-        for i in range(len(player.PawnList)):
-            if player.getColor() == 'Red':
-                someyho = """
-
-    #__________________________________________
 
 
     title2 = Text(Point(900,200),"Click anywhere to roll the dice ")
@@ -78,7 +70,9 @@ def PlayerTurnEvent(player = User(), game = Board(), win = GraphWin):
 
         Main_Choice = textEntry.getText() 
 
-        
+        """
+        Control paths
+        """
 
 
         if Main_Choice == 'a' and ((Dice1 == 5 or Dice2 == 5) or (Dice1+Dice2 == 5)):
@@ -149,7 +143,6 @@ def PlayerTurnEvent(player = User(), game = Board(), win = GraphWin):
                     chosenValue = textEntry.getText()
 
                     Title5.undraw()
-                   
 
 
                     if chosenValue  == '1' and Dice1_been_used != True: #Check if the Dice1 Value has been used already 
@@ -157,8 +150,11 @@ def PlayerTurnEvent(player = User(), game = Board(), win = GraphWin):
                         player.moveGraph_Pawn(result,int(chosenPawn)-1,win)
                         
                         for i in range(len(game.getPlayerList())):
-                            temp = game.getPlayer(i)
-                            #player.Devour(temp) # verify if the pawn landed in another players spot, to be devoured and sent to the nest
+                            if( game.getPlayer(i).getPawn(i).getPos() == player.getPawn(int(chosenPawn)-1) and game.getPlayer(i).getColor != player.getColor()):
+                                temp = game.getPlayer(i).getPawn(i)
+                                isDevored = player.Devour(temp,game.getPlayer(i).getColor(),i) # verify if the pawn landed in another players spot, to be devoured and sent to the nest
+                                if isDevored == True:
+                                    game.getPlayer(i).returnGraph_Pawn_Start(i)
 
                         player.Pawn_Reach_End() #validate if the user reached the cho
                         Dice1_been_used = True
@@ -169,8 +165,11 @@ def PlayerTurnEvent(player = User(), game = Board(), win = GraphWin):
                             result = player.getPawn(int(chosenPawn)-1).Advance(Dice2)
                             player.moveGraph_Pawn(result,int(chosenPawn)-1,win)#move pawn graphically
                             for i in range(len(game.getPlayerList())):
-                                temp = game.getPlayer(i)
-                               # player.Devour(temp)
+                                if( game.getPlayer(i).getPawn(i).getPos() == player.getPawn(int(chosenPawn)-1) and game.getPlayer(i).getColor != player.getColor() ):
+                                    temp = game.getPlayer(i).getPawn(i)
+                                    isDevored = player.Devour(temp,game.getPlayer(i).getColor(),i) # verify if the pawn landed in another players spot, to be devoured and sent to the nest
+                                    if isDevored == True:
+                                        game.getPlayer(i).returnGraph_Pawn_Start(i)
 
                             player.Pawn_Reach_End() #validate if the user reached the end of color path
                             Dice2_been_used = True
@@ -179,11 +178,15 @@ def PlayerTurnEvent(player = User(), game = Board(), win = GraphWin):
                         else:
 
                             if chosenValue  == '3' and (Dice1_been_used != True and Dice2_been_used != True): #Check if the Dice1 adn Dice2 Value has been used already 
+                                result = player.getPawn(int(chosenPawn)-1).Advance(Dice2)
                                 player.getPawn(int(chosenPawn)-1).Advance(Dice2 + Dice2)
                                 player.moveGraph_Pawn(result,int(chosenPawn)-1,win)
                                 for i in range(len(game.getPlayerList())):
-                                    temp = game.getPlayer(i)
-                                    #player.Devour(temp)
+                                    if( game.getPlayer(i).getPawn(i).getPos() == player.getPawn(int(chosenPawn)-1) and game.getPlayer(i).getColor != player.getColor() ):
+                                        temp = game.getPlayer(i).getPawn(i)
+                                        isDevored = player.Devour(temp,game.getPlayer(i).getColor(),i) # verify if the pawn landed in another players spot, to be devoured and sent to the nest
+                                        if isDevored == True:
+                                            game.getPlayer(i).returnGraph_Pawn_Start(i)
 
                                 player.Pawn_Reach_End()#validate if the user reached the end of color path
                                 Dice2_been_used = True
@@ -200,5 +203,3 @@ def PlayerTurnEvent(player = User(), game = Board(), win = GraphWin):
 
     if isDouble == True :
         PlayerTurnEvent(player,game,win)
-
-

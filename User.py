@@ -283,20 +283,22 @@ class User():
         """
         return random.randint(1,6) , random.randint(1,6)
     
-    def Devour(self, adversary):
+    def Devour(self, adversary = Pawn ,color = str, i = int):
         """
         if a player lands in the same spot as another user, an event will occur where the player will capture the spot and losing side's pawn
         will be captured and sent to nest.
         """
-        
-        for pawns in self.PawnList:
-            for i in range(len(adversary.PawnList)):
-                if (pawns.getPos() == adversary.PawnList[i].getPos() and self.getColor() != adversary.PawnList[i].getColor()) and (pawns.isSafe() != True and adversary.PawnList[i].isSafe() != True):
-                    adversary.PawnList[i].amount_steps_taken = 0
-                    adversary.PawnList[i].setPos(0)
-                    adversary.PawnList[i].setStatus(True)
 
-                    adversary.returnGraph_Pawn_Start(i)
+        eat =False
+        for pawns in self.PawnList:
+            if ( (pawns.pos == adversary.pos and self.getColor() != color) and (pawns.isSafe() != True and adversary.isSafe() != True) ):
+                    adversary.amount_steps_taken = 0
+                    adversary.setStatus()
+                    eat = True
+                    return eat
+        
+        return eat
+                    
 
                     
         
@@ -318,9 +320,3 @@ class User():
                    return True
             
             return False
-
-        
-
-
-
-    
