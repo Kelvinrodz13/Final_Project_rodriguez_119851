@@ -107,8 +107,7 @@ class User():
                     self.graphPawns[i].setFill(self.getColor())
                     self.graphPawns[i].undraw()
                     self.graphPawns[i].draw(win)
-
-                    
+  
 
                 elif self.getColor() == 'Blue':
 
@@ -268,7 +267,6 @@ class User():
     
     def Pawn_Reach_End(self):
         for i in range(len(self.PawnList)):
-            if self.getColor() == 'Yellow':
                 if self.PawnList[i].getPos() == 68 and self.PawnList[i].getStepsTaken() == 63:
                     self.PiecesAtEnd += 1
                     self.PawnList.pop(i)
